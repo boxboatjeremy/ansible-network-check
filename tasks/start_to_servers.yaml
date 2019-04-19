@@ -1,4 +1,4 @@
-  - name: set variables
+  - name: start_to_servers - set variables
     set_fact:
       test_to_ip:  "{{lookup('ip', check_to_host) }}"
       test_protocol: "{{port_definition['type']|lower}}"

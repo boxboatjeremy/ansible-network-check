@@ -16,7 +16,7 @@
     debug:
       var: check_from_host
 
-  - name: set variables
+  - name: tcp_from_clients - set variables
     set_fact:
 #      test_from_ip:  "{{hostvars[check_from_host]['ansible_default_ipv4']['address']}}"
       test_from_ip:  "{{lookup('ip',check_from_host ) }}"

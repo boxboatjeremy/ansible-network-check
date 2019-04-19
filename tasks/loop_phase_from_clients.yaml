@@ -3,7 +3,11 @@
     debug:
       var: check_from_host
 
-  - name: set variables
+  - name: debug check to host
+    debug:
+      var: check_to_host
+
+  - name: loop_phase_from_clients - set variables
     set_fact:
 #      current_from_ip: "{{hostvars[check_from_host]['ansible_default_ipv4']['address']}}"
       current_from_ip:  "{{lookup('ip', check_from_host )}}"

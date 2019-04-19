@@ -2,27 +2,31 @@
   hosts: localhost
   ignore_errors: true
   vars_files: 
-  - port_definition.yaml
+    - port_definition.yaml
   tasks:
-  - name: print var
-    debug: 
-      var: port_definitions
+    - name: print var
+      debug:
+        var: port_definitions
 
-  - name: Defining fact initialization
-    include_tasks: "tasks/init_phases.yaml port_definition={{item_port}}"
-    with_items: "{{port_definitions}}"
-    loop_control:
-      loop_var: item_port
-    run_once: true
+    - name: Defining fact initialization
+      include_tasks:
+        file: tasks/init_phases.yaml
+      vars:
+        port_definition: "{{ item_port }}"
+      with_items: "{{port_definitions}}"
+      loop_control:
+        loop_var: item_port
+      run_once: true
 
-
-  - name: Testing Ports
-    include_tasks: "tasks/start_port_check.yaml port_definition={{item_port}}"
-    with_items: "{{port_definitions}}"
-    loop_control: 
-      loop_var: item_port
-    run_once: true
-
+    - name: Testing Ports
+      include_tasks:
+        file: tasks/start_port_check.yaml
+      vars:
+        port_definition: "{{ item_port }}"
+      with_items: "{{port_definitions}}"
+      loop_control:
+        loop_var: item_port
+      run_once: true
 
 #  - name: Ensure no existing process running
 #    shell: |

@@ -37,7 +37,7 @@ class CallbackModule(CallbackBase):
             phase_result = phases[phase].get('result', '')
             if phase_protocol:
                 self._display.display(
-                    'FROM:{}, TO:{}, PROT:{}, PORT:{}, RESULT:{} '.format(phase_from, phase_to,phase_protocol, phase_port, phase_result),color=self.phase_color(phase_result))
+                    'FROM:{}, TO:{}, PROT:{}, PORT:{}, RESULT:{} '.format(phase_from, phase_to, phase_protocol, phase_port, phase_result),color=self.phase_color(phase_result))
 
     def phase_color(self, status):
         """ Return color code for installer phase"""

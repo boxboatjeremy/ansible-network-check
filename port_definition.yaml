@@ -1,61 +1,246 @@
+# https://docs.docker.com/ee/ucp/admin/install/system-requirements/#ports-used
 port_definitions:
-- from_group: nodes
-  to_group: nodes
-  type: udp
-  port: 4789
-- from_group: nodes
-  to_group: masters
-  type: udp
-  port: 8053
-- from_group: nodes
-  to_group: masters
-  type: tcp
-  port: 8053
-- from_group: nodes
-  to_group: masters
-  type: tcp
-  port: 8443
-- from_group: masters
-  to_group: nodes
-  type: tcp
-  port: 10250
-- from_group: masters
-  to_group: nodes
-  type: tcp
-  port: 10010
-- from_group: masters
-  to_group: masters
-  type: udp
-  port: 8053
 
-# Optional for NFS
-- from_group: masters
-  to_group: masters
-  type: udp
-  port: 2049
+  # managers/workers, TCP 179, Internal, Port for BGP peers, used for kubernetes networking
+  - from_group: internal_all
+    to_group: internal_all
+    type: tcp
+    port: 179
 
 
-- from_group: masters
-  to_group: masters
-  type: tcp
-  port: 2379
-- from_group: masters
-  to_group: masters
-  type: tcp
-  port: 2380
+#
+#  # managers, TCP 443, Internal, Port for the UCP web UI and API
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 443
+#
+#  # managers, TCP 443, External, Port for the UCP web UI and API
+#  - from_group: external_admin
+#    to_group: managers
+#    type: tcp
+#    port: 443
+#
+#  # managers, TCP 2376, Internal, Port for the Docker Swarm manager. Used for backwards compatibility
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 2376
+#
+#  # managers, TCP 2377, Internal, Port for control communication between swarm nodes
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 2377
+#
+#  # managers/workers, UDP 4789, Internal, Port for overlay networking
+#  - from_group: internal_all
+#    to_group: internal_all
+#    type: udp
+#    port: 4789
+#
+#  # managers, TCP 6443, External, Port for Kubernetes API server endpoint
+#  - from_group: external_admin
+#    to_group: managers
+#    type: tcp
+#    port: 6443
+#
+#  # managers, TCP 6443, Internal, Port for Kubernetes API server endpoint
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 6443
+#
+#  # managers/workers, TCP 6444, Self, Port for Kubernetes API reverse proxy
+#  - from_group: internal_self
+#    to_group: internal_self
+#    type: tcp
+#    port: 6444
+#
+#  # managers/workers, TCP 7946, Internal, Port for gossip-based clustering
+#  - from_group: internal_all
+#    to_group: internal_all
+#    type: tcp
+#    port: 7946
+#
+#  # managers/workers, UDP 7946, Internal, Port for gossip-based clustering
+#  - from_group: internal_all
+#    to_group: internal_all
+#    type: udp
+#    port: 7946
+#
+#  # managers/workers, TCP 9099, Self, Port for calico health check
+#  - from_group: internal_self
+#    to_group: internal_self
+#    type: tcp
+#    port: 9099
+#
+#  # managers/workers, TCP 10250, Internal, Port for Kubelet
+#  - from_group: internal_all
+#    to_group: internal_all
+#    type: tcp
+#    port: 10250
+#
+#  # managers/workers, TCP 12376, Internal, Port for a TLS authentication proxy that provides access to the Docker Engine
+#  - from_group: internal_all
+#    to_group: internal_all
+#    type: tcp
+#    port: 12376
+#
+#  # managers/workers, TCP 12378, Self, Port for Etcd reverse proxy
+#  - from_group: internal_self
+#    to_group: internal_self
+#    type: tcp
+#    port: 12378
+#
+#  # managers, TCP 12379, Internal, Port for Etcd Control API
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12379
+#
+#  # managers, TCP 12380, Internal, Port for Etcd Peer API
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12380
+#
+#  # managers, TCP 12381, Internal, Port for the UCP cluster certificate authority
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12381
+#
+#  # managers, TCP 12382, Internal, Port for the UCP client certificate authority
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12382
+#
+#  # managers, TCP 12383, Internal, Port for the authentication storage backend
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12383
+#
+#  # managers, TCP 12384, Internal, Port for the authentication storage backend for replication across managers
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12384
+#
+#  # managers, TCP 12385, Internal, Port for the authentication service API
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12385
+#
+#  # managers, TCP 12386, Internal, Port for the authentication worker
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12386
+#
+#  # managers, TCP 12388, Internal, Internal Port for the Kubernetes API Server
+#  - from_group: internal_all
+#    to_group: managers
+#    type: tcp
+#    port: 12388
+#
+#
 
-################ addition for 3.11 prometheus monitoring
-- from_group: nodes
-  to_group: nodes
-  type: tcp
-  port: 9100
 
-- from_group: nodes
-  to_group: nodes
-  type: tcp
-  port: 10250
 
-- from_group: nodes
-  to_group: nodes
-  type: udp
-  port: 8444
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+#
+#
+#
+#
+#- from_group: nodes
+#  to_group: nodes
+#  type: udp
+#  port: 4789
+#- from_group: nodes
+#  to_group: masters
+#  type: udp
+#  port: 8053
+#- from_group: nodes
+#  to_group: masters
+#  type: tcp
+#  port: 8053
+#- from_group: nodes
+#  to_group: masters
+#  type: tcp
+#  port: 8443
+#- from_group: masters
+#  to_group: nodes
+#  type: tcp
+#  port: 10250
+#- from_group: masters
+#  to_group: nodes
+#  type: tcp
+#  port: 10010
+#- from_group: masters
+#  to_group: masters
+#  type: udp
+#  port: 8053
+#
+## Optional for NFS
+#- from_group: masters
+#  to_group: masters
+#  type: udp
+#  port: 2049
+#
+#
+#- from_group: masters
+#  to_group: masters
+#  type: tcp
+#  port: 2379
+#- from_group: masters
+#  to_group: masters
+#  type: tcp
+#  port: 2380
+#
+################# addition for 3.11 prometheus monitoring
+#- from_group: nodes
+#  to_group: nodes
+#  type: tcp
+#  port: 9100
+#
+#- from_group: nodes
+#  to_group: nodes
+#  type: tcp
+#  port: 10250
+#
+#- from_group: nodes
+#  to_group: nodes
+#  type: udp
+#  port: 8444

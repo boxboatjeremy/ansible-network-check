@@ -3,7 +3,7 @@
     debug:
       var: check_from_host
 
-  - name: set variables
+  - name: udp_from_clients - set variables
     set_fact:
       test_from_ip:  "{{lookup('ip',check_from_host ) }}"
 
